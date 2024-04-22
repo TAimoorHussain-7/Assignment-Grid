@@ -21,12 +21,4 @@ namespace ProjectCore.Grid
         public List<List<GridTileIndex>> TerrainGrid;
     }
 
-    //public enum TileType
-    //{
-    //    Dirt,
-    //    Grass,
-    //    Stone,
-    //    Wood
-    //}
-
 }
