@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace ProjectCore.Data.Json
 {
@@ -8,17 +9,52 @@ namespace ProjectCore.Data.Json
     {
         public T ParseJson<T>(T jsonObj, string jsonPath)
         {
-            string filePath = Path.Combine(Application.dataPath, jsonPath);
-            string jsonString = File.ReadAllText(filePath); 
-            jsonObj = JsonUtility.FromJson<T>(jsonString);
-            return jsonObj;
+            if (!File.Exists(jsonPath))
+            {
+                Debug.LogError("JSON file not found at path: " + jsonPath);
+                return default(T);
+            }
+
+
+            try
+            {
+                string jsonString = File.ReadAllText(jsonPath);
+                T parsedObject = JsonConvert.DeserializeObject<T>(jsonString);
+                return parsedObject;
+            }
+            catch (JsonReaderException jsonEx)
+            {
+                Debug.LogError("JSON parsing error at path: " + jsonPath + "\n" + jsonEx.Message);
+                return default(T);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Error parsing JSON at path: " + jsonPath + "\n" + ex.Message);
+                return default(T);
+            }
         }
 
         public void SaveJson<T>(T jsonObj, string jsonPath, string fileName)
         {
-            string filePath = Path.Combine(jsonPath, fileName + ".json");
-            string jsonString = JsonUtility.ToJson(jsonObj);
-            File.WriteAllText(filePath, jsonString);
+            try
+            {
+                string filePath = Path.Combine(jsonPath, fileName + ".json");
+                int fileNumber = 1;
+                while (File.Exists(filePath))
+                {
+                    fileName = fileName + "_" + fileNumber;
+                    filePath = Path.Combine(jsonPath, fileName + ".json");
+                    fileNumber++;
+                }
+
+                string jsonString = JsonConvert.SerializeObject(jsonObj);
+                File.WriteAllText(filePath, jsonString);
+                Debug.Log("Object converted to JSON file and saved successfully at path: " + filePath);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Error converting object to JSON and saving file at path: " + jsonPath + "\n" + ex.Message);
+            }
         }
     }
 }

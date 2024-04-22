@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace ProjectCore.Data.Json
 {
@@ -8,9 +9,25 @@ namespace ProjectCore.Data.Json
     {
         public void SaveJson<T>(T jsonObj, string jsonPath, string fileName)
         {
-            string filePath = Path.Combine(jsonPath, fileName + ".json");
-            string jsonString = JsonUtility.ToJson(jsonObj);
-            File.WriteAllText(filePath, jsonString);
+            try
+            {
+                string filePath = Path.Combine(jsonPath, fileName + ".json");
+                int fileNumber = 1;
+                while (File.Exists(filePath))
+                {
+                    fileName = fileName + "_" + fileNumber;
+                    filePath = Path.Combine(jsonPath, fileName + ".json");
+                    fileNumber++;
+                }
+
+                string jsonString = JsonConvert.SerializeObject(jsonObj);
+                File.WriteAllText(filePath, jsonString);
+                Debug.Log("Object converted to JSON file and saved successfully at path: " + filePath);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("Error converting object to JSON and saving file at path: " + jsonPath + "\n" + ex.Message);
+            }
         }
     }
 }

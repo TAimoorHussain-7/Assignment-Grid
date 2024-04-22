@@ -6,7 +6,13 @@ namespace ProjectCore.Grid
     [Serializable]
     public class GridTileIndex
     {
-        public int TileType ;
+        public int TileType;
+    }
+    
+    [Serializable]
+    public class GridRow
+    {
+        public List<int> IntList;
     }
 
     [Serializable]
