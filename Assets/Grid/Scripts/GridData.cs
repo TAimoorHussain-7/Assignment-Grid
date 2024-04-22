@@ -1,16 +1,20 @@
 using System;
+using System.Collections.Generic;
 
 namespace ProjectCore.Grid
 {
-    public class TerrainGridJson
+    [Serializable]
+    public class GridTileIndex
     {
-        public int[][] TerrainGrid { get; set; }
+        public int TileType ;
     }
 
-    public class TerrainGridTile
+    [Serializable]
+    public class GridData
     {
-        public int TileType { get; set; }
+        public List<List<GridTileIndex>> TerrainGrid;
     }
+
     //public enum TileType
     //{
     //    Dirt,

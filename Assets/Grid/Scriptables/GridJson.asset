@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d515c1b61290b49a35373d11f0b631, type: 3}
   m_Name: GridJson
   m_EditorClassIdentifier: 
+  GridData:
+    TerrainGrid: []

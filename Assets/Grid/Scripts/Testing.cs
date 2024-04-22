@@ -5,24 +5,29 @@ using ProjectCore.Data.Json;
 public class Testing : MonoBehaviour
 {
     [SerializeField] JsonParserGridData JsonMan;
-    [SerializeField] TerrainDataSO TerainGridSO;
+    [SerializeField] GridDataSO GridTileSData;
     [SerializeField] string JsonPath;
 
-    private TerrainGridJson _gridData;
+    private GridData _gridData;
 
     void Start()
     {
-        _gridData = JsonMan.ParseJson(_gridData, JsonPath);
+        _gridData = JsonMan.ParseJson<GridData>(new GridData(), JsonPath);
     }
 
     public void CheckData()
     {
-        //TerainGridSO.gridData = _gridData;
-        foreach (var row in _gridData.TerrainGrid)
+        if (GridTileSData.GridData != null)
         {
-            foreach (var tile in row)
+            // Iterate through each row in the grid
+            foreach (var row in _gridData.TerrainGrid)
             {
-                //Debug.Log("TileType: " + tile.TileType);
+                // Iterate through each tile in the row
+                foreach (var tile in row)
+                {
+                    // Print the TileType of each tile
+                    Debug.Log("TileType: " + tile.TileType);
+                }
             }
         }
     }
