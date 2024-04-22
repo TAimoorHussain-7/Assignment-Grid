@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+namespace ProjectCore.Grid
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Grid : MonoBehaviour
     {
-        
-    }
+        private int _with, _height;
+        private int[,] _gridArray;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Grid(int width, int height)
+        {
+            _with = width;
+            _height = height;
+            _gridArray = new int[width,height];
+        }
     }
 }
