@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 926605761141196420, guid: d3efa9ec94172f44890fa54b86447424, type: 3}
       propertyPath: TileId
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1184125023846557198, guid: d3efa9ec94172f44890fa54b86447424, type: 3}
       propertyPath: m_Name
-      value: WoodTile Variant
+      value: WoodTile
       objectReference: {fileID: 0}
     - target: {fileID: 5917739524498256844, guid: d3efa9ec94172f44890fa54b86447424, type: 3}
       propertyPath: m_Sprite

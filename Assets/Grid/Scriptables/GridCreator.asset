@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd1e11c689f0a04ab099f90d48dd542, type: 3}
-  m_Name: jsonParserGrid
+  m_Script: {fileID: 11500000, guid: f3167ee92a802994fa7f1e49cf60df0c, type: 3}
+  m_Name: GridCreator
   m_EditorClassIdentifier: 
+  TilePrefabs: {fileID: 11400000, guid: 43822e272d699c445a39d91654494cac, type: 2}

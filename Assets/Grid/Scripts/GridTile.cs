@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectCore.Grid
 {
-    public class GridTileId: MonoBehaviour
+    public class GridTile: MonoBehaviour
     {
         public int TileId;
     }
