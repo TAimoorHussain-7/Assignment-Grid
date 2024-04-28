@@ -8,17 +8,15 @@ namespace ProjectCore.Grid
     {
         public int TileType;
     }
-    
-    [Serializable]
-    public class GridRow
-    {
-        public List<int> IntList;
-    }
 
-    [Serializable]
-    public class GridData
+    public class GridJsonData
     {
         public List<List<GridTileIndex>> TerrainGrid;
     }
 
+    [Serializable]
+    public class GridRow
+    {
+        public List<GridTile> TilesRow;
+    }
 }

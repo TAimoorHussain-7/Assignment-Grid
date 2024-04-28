@@ -1,6 +1,7 @@
 using UnityEngine;
 using ProjectCore.Variables;
 using ProjectCore.Collections;
+using System.Collections.Generic;
 
 namespace ProjectCore.Grid
 {
@@ -9,18 +10,20 @@ namespace ProjectCore.Grid
     {
         [SerializeField] SOGameObjectsArray TilePrefabs;
         [SerializeField] SOBool CreatingGrid;
+        [SerializeField] ProjectGrid CurrentGrid;
 
-        public void CreateGrid(GridDataSO gridData, Vector3 tileSize, Transform tileParent)
+        public void CreateGrid(GridJsonData gridData, Vector3 tileSize, Transform tileParent)
         {
-            if (gridData.GridRows.Length > 0)
+            if (gridData.TerrainGrid.Count > 0)
             {
-                for (int r = 0; r < gridData.GridRows.Length; r++)
+                CurrentGrid.GridTiles = new GridRow[gridData.TerrainGrid.Count];
+                for (int r = 0; r < gridData.TerrainGrid.Count; r++)
                 {
-                    int[] row = gridData.GridRows[r].IntList.ToArray();
-
-                    for (int c = 0; c < row.Length; c++)
+                    CurrentGrid.GridTiles[r] = new GridRow();
+                    CurrentGrid.GridTiles[r].TilesRow = new List<GridTile>();
+                    for (int c = 0; c < gridData.TerrainGrid[r].Count; c++)
                     {
-                        int tileTypeIndex = row[c];
+                        int tileTypeIndex = gridData.TerrainGrid[r][c].TileType;
 
                         // Check if the tile type index is valid
                         if (tileTypeIndex >= 0 && tileTypeIndex < TilePrefabs.Objects.Length)
@@ -35,6 +38,7 @@ namespace ProjectCore.Grid
                                 tile.TileId = tileTypeIndex;
                                 tile.xIndex = r;
                                 tile.yIndex = c;
+                                CurrentGrid.GridTiles[r].TilesRow.Add(tile);
                             }
                             else
                             {

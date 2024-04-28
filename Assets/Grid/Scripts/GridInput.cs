@@ -33,7 +33,7 @@ namespace ProjectCore.Grid
         private IEnumerator RayCasting()
         {
             while (Editing.Value)
-            {   // Cast a ray from the camera to the mouse position
+            {   
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 // Perform raycasting
@@ -44,6 +44,7 @@ namespace ProjectCore.Grid
 
                     // Perform additional actions as needed
                 }
+
                 yield return new WaitForSeconds(0.01f);
             }
             StopRayCasting();

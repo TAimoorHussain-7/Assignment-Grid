@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3167ee92a802994fa7f1e49cf60df0c, type: 3}
-  m_Name: GridCreator
+  m_Script: {fileID: 11500000, guid: 46fb5b87d32346949b329f4c9e20222e, type: 3}
+  m_Name: Table
   m_EditorClassIdentifier: 
-  TilePrefabs: {fileID: 11400000, guid: 43822e272d699c445a39d91654494cac, type: 2}
-  CreatingGrid: {fileID: 11400000, guid: 5c9f7cbef390f434397327131519bcd0, type: 2}
   CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}

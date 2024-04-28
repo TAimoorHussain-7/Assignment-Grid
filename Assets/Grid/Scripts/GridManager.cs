@@ -12,7 +12,7 @@ namespace ProjectCore.Grid
         [SerializeField] SOBool CreatingGrid;
         [SerializeField] SOEvents CreateGridEvent;
         [SerializeField] GridCreator CurrentGridCreator;
-        [SerializeField] GridDataSO CurrentGridData;
+        [SerializeField] GridJsonDataSO CurrentGridJson;
 
         private void OnEnable()
         {
@@ -33,7 +33,7 @@ namespace ProjectCore.Grid
                 {
                     Destroy(tile.gameObject);
                 }
-                CurrentGridCreator.CreateGrid(CurrentGridData, TileSize, GridParent);
+                CurrentGridCreator.CreateGrid(CurrentGridJson.CurrentJsonData, TileSize, GridParent);
             }
         }
     }
