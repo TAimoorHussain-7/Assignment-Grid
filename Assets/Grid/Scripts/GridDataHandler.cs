@@ -1,5 +1,6 @@
 using UnityEngine;
 using ProjectCore.Grid;
+using ProjectCore.Events;
 using ProjectCore.Data.Json;
 using System.Collections.Generic;
 
@@ -7,9 +8,20 @@ public class GridDataHandler : MonoBehaviour
 {
     [SerializeField] JsonManager JsonMan;
     [SerializeField] GridDataSO GridTileSData;
+    [SerializeField] SOEvents SaveGridEvent;
     [SerializeField] string JsonFilePath,JsonPath, JsonFileName;
 
     private GridData _gridData;
+
+    private void OnEnable()
+    {
+        SaveGridEvent.Handler += SaveGridDataJson;
+    }
+
+    private void OnDisable()
+    {
+        SaveGridEvent.Handler -= SaveGridDataJson;
+    }
 
     void Start()
     {
@@ -74,7 +86,7 @@ public class GridDataHandler : MonoBehaviour
         return gridData;
     }
 
-    public void SaveGridDataJson()
+    private void SaveGridDataJson()
     {
         JsonMan.SaveJson<GridData>(ConvertToGridData(GridTileSData), JsonPath, JsonFileName);
     }

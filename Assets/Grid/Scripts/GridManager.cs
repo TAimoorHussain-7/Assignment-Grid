@@ -1,4 +1,5 @@
 using UnityEngine;
+using ProjectCore.Events;
 using ProjectCore.Variables;
 
 
@@ -9,12 +10,21 @@ namespace ProjectCore.Grid
         [SerializeField] Vector3 TileSize;
         [SerializeField] Transform GridParent;
         [SerializeField] SOBool CreatingGrid;
+        [SerializeField] SOEvents CreateGridEvent;
         [SerializeField] GridCreator CurrentGridCreator;
         [SerializeField] GridDataSO CurrentGridData;
 
+        private void OnEnable()
+        {
+            CreateGridEvent.Handler += CreateNewGrid;
+        }
 
+        private void OnDisable()
+        {
+            CreateGridEvent.Handler -= CreateNewGrid;
+        }
 
-        public void CreateNewGrid()
+        private void CreateNewGrid()
         {
             if (!CreatingGrid.Value)
             {
@@ -26,6 +36,5 @@ namespace ProjectCore.Grid
                 CurrentGridCreator.CreateGrid(CurrentGridData, TileSize, GridParent);
             }
         }
-
     }
 }

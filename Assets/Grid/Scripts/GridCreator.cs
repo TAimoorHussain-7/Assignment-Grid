@@ -30,8 +30,11 @@ namespace ProjectCore.Grid
                             if (tilePrefab != null)
                             {
                                 Vector3 position = new Vector3(c * tileSize.x, 0, r * tileSize.z); // Adjust position as needed
-                                GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, tileParent);
+                                GridTile tile = Instantiate(tilePrefab, position, Quaternion.identity, tileParent).GetComponent<GridTile>();
                                 tile.transform.localScale = new Vector3(tileSize.x, 1f, tileSize.z); // Set tile size
+                                tile.TileId = tileTypeIndex;
+                                tile.xIndex = r;
+                                tile.yIndex = c;
                             }
                             else
                             {
