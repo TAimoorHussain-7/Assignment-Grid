@@ -1,4 +1,5 @@
 using UnityEngine;
+using ProjectCore.Variables;
 using ProjectCore.Collections;
 
 namespace ProjectCore.Grid
@@ -7,6 +8,7 @@ namespace ProjectCore.Grid
     public class GridCreator : ScriptableObject
     {
         [SerializeField] SOGameObjectsArray TilePrefabs;
+        [SerializeField] SOBool CreatingGrid;
 
         public void CreateGrid(GridDataSO gridData, Vector3 tileSize, Transform tileParent)
         {
@@ -27,9 +29,9 @@ namespace ProjectCore.Grid
                             GameObject tilePrefab = TilePrefabs.Objects[tileTypeIndex];
                             if (tilePrefab != null)
                             {
-                                Vector3 position = new Vector3(c * tileSize.x, -r * tileSize.y, 0); // Adjust position as needed
+                                Vector3 position = new Vector3(c * tileSize.x, 0, r * tileSize.z); // Adjust position as needed
                                 GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, tileParent);
-                                tile.transform.localScale = new Vector3(tileSize.x, tileSize.y, 1f); // Set tile size
+                                tile.transform.localScale = new Vector3(tileSize.x, 1f, tileSize.z); // Set tile size
                             }
                             else
                             {
@@ -43,6 +45,7 @@ namespace ProjectCore.Grid
             {
                 Debug.LogError("No GridData Available to create Grid");
             }
+            CreatingGrid.Value = false;
         }
 
     }

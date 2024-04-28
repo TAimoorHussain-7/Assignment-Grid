@@ -1,4 +1,5 @@
 using UnityEngine;
+using ProjectCore.Variables;
 
 
 namespace ProjectCore.Grid
@@ -7,7 +8,7 @@ namespace ProjectCore.Grid
     {
         [SerializeField] Vector3 TileSize;
         [SerializeField] Transform GridParent;
-
+        [SerializeField] SOBool CreatingGrid;
         [SerializeField] GridCreator CurrentGridCreator;
         [SerializeField] GridDataSO CurrentGridData;
 
@@ -15,7 +16,15 @@ namespace ProjectCore.Grid
 
         public void CreateNewGrid()
         {
-            CurrentGridCreator.CreateGrid(CurrentGridData,TileSize,GridParent);
+            if (!CreatingGrid.Value)
+            {
+                CreatingGrid.Value = true;
+                foreach (Transform tile in GridParent)
+                {
+                    Destroy(tile.gameObject);
+                }
+                CurrentGridCreator.CreateGrid(CurrentGridData, TileSize, GridParent);
+            }
         }
 
     }
