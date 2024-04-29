@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 466864727495174569}
   - component: {fileID: 3326834734611750987}
-  m_Layer: 6
-  m_Name: HorizontalTable
+  m_Layer: 0
+  m_Name: VerticlelTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

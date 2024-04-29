@@ -49,6 +49,7 @@ MonoBehaviour:
   TileId: 0
   xIndex: 0
   yIndex: 0
+  IsOccupied: 0
 --- !u!65 &3559032103692012432
 BoxCollider:
   m_ObjectHideFlags: 0
