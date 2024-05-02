@@ -8,6 +8,8 @@ namespace ProjectCore.Grid
         [SerializeField] protected GameObject CurrentObj;
         [SerializeField] protected int RequiredTileId;
 
+        protected bool CanInstantiate;
+
         public abstract void CheckForLocation(GridTile currentTile);
         public abstract void InstantiateObject();
     }

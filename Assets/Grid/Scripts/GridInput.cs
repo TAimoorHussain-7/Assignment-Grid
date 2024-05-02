@@ -12,8 +12,10 @@ namespace ProjectCore.Grid
         [SerializeField] float RayCastLength;
         [SerializeField] SOBool Editing;
         [SerializeField] SOEvents RayCastEvent;
+        [SerializeField] GridObjectHolderSO CurrentObject;
 
         private Coroutine RaycastRotine;
+        private GridTile lastHighlightedTile;
 
         private void OnEnable()
         {
@@ -40,9 +42,24 @@ namespace ProjectCore.Grid
                 if (Physics.Raycast(ray, out hit, RayCastLength, tileLayer))
                 {
                     GridTile selectedTile = hit.collider.GetComponent<GridTile>();
-                    Debug.Log(selectedTile.xIndex + "," + selectedTile.yIndex);
+                    if (selectedTile != lastHighlightedTile)
+                    {
+                        // Remove highlight from the last highlighted tile
+                        if (lastHighlightedTile != null)
+                        {
+                            lastHighlightedTile.RemoveHighlight();
+                        }
 
-                    // Perform additional actions as needed
+                        // Highlight the selected tile
+                        selectedTile.HighlightTile();
+                        lastHighlightedTile = selectedTile;
+                        CurrentObject.GridObject.CheckForLocation(selectedTile);
+                    }
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    CurrentObject.GridObject.InstantiateObject();
                 }
 
                 yield return new WaitForSeconds(0.01f);

@@ -6,16 +6,16 @@ namespace ProjectCore.Grid
     public class TableObject : GridObjectInstantiator
     {
         [SerializeField] Vector2Int[] MyNeighbours;
+
+        private GridTile StartingTile;
         
         public override void CheckForLocation(GridTile currentTile)
         {
+            CanInstantiate = false;
+            StartingTile = null;
             if (currentTile.TileId == RequiredTileId)
             {
-                int availableNeighbour = CheckAvailableNeighbour(currentTile.xIndex, currentTile.yIndex);
-                if (availableNeighbour != -1)
-                {
-
-                }
+                CheckAvailableNeighbour(currentTile);
             }
         }
 
@@ -24,24 +24,35 @@ namespace ProjectCore.Grid
 
         }
 
-        private int CheckAvailableNeighbour(int x , int y)
+        private void CheckAvailableNeighbour(GridTile currentTile)
         {
             for (int t =0; t<MyNeighbours.Length; t++)
             {
-                Vector2Int nextTile = new Vector2Int(x + MyNeighbours[t].x, y + MyNeighbours[t].y);
+                Vector2Int nextTile = new Vector2Int(currentTile.xIndex + MyNeighbours[t].x, currentTile.yIndex + MyNeighbours[t].y);
                 if (CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y] != null)
                 {
-                    GridTile tile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
-                    if (tile.TileId == RequiredTileId && !tile.IsOccupied)
+                    GridTile newTile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
+                    if (newTile.TileId == RequiredTileId && !newTile.IsOccupied)
                     {
-                        return t;
+                        CanInstantiate = true;
+                        if (t == 0)
+                        {
+                            ShowPlacement(currentTile);
+                        }
+                        else if (t == 1)
+                        {
+                            ShowPlacement(newTile);
+                        }
+                        else
+                        {
+
+                        }
                     }
                 }
             }
-            return -1;
         }
 
-        private void ShowActiveTile(int neighbourIndex)
+        private void ShowPlacement(GridTile StratTile)
         {
 
         }

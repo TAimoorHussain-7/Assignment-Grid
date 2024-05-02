@@ -10,6 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46fb5b87d32346949b329f4c9e20222e, type: 3}
-  m_Name: Table
+  m_Name: HorizontalTable
   m_EditorClassIdentifier: 
   CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}
+  CurrentObj: {fileID: 3522884240086887124, guid: 110a96dcf1d858a4f9d067c21dd77872, type: 3}
+  RequiredTileId: 3
+  MyNeighbours:
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
