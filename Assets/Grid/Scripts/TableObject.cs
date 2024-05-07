@@ -7,45 +7,56 @@ namespace ProjectCore.Grid
     {
         [SerializeField] Vector2Int[] MyNeighbours;
 
-        private GridTile StartingTile;
+        private GridTile _startingTile, _neighbourTile;
         
         public override void CheckForLocation(GridTile currentTile)
         {
             CanInstantiate = false;
-            StartingTile = null;
+            _startingTile = null;
             if (currentTile.TileId == RequiredTileId)
             {
                 CheckAvailableNeighbour(currentTile);
             }
         }
 
-        public override void InstantiateObject()
+        public override void InstantiateObject(Transform parent)
         {
-
+            if (CanInstantiate)
+            {
+                _startingTile.IsOccupied = true;
+                _neighbourTile.IsOccupied = true;
+                GameObject newObj = Instantiate(CurrentObj, parent);
+                newObj.transform.position = _startingTile.transform.position;
+            }
         }
 
         private void CheckAvailableNeighbour(GridTile currentTile)
         {
-            for (int t =0; t<MyNeighbours.Length; t++)
+            if (!currentTile.IsOccupied)
             {
-                Vector2Int nextTile = new Vector2Int(currentTile.xIndex + MyNeighbours[t].x, currentTile.yIndex + MyNeighbours[t].y);
-                if (CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y] != null)
+                for (int t = 0; t < MyNeighbours.Length; t++)
                 {
-                    GridTile newTile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
-                    if (newTile.TileId == RequiredTileId && !newTile.IsOccupied)
+                    Vector2Int nextTile = new Vector2Int(currentTile.xIndex + MyNeighbours[t].x, currentTile.yIndex + MyNeighbours[t].y);
+                    if (nextTile.x < CurrentGrid.GridTiles.Length && nextTile.y < CurrentGrid.GridTiles[nextTile.x].TilesRow.Count)
                     {
-                        CanInstantiate = true;
-                        if (t == 0)
+                        GridTile newTile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
+                        if (newTile.TileId == RequiredTileId && !newTile.IsOccupied)
                         {
-                            ShowPlacement(currentTile);
-                        }
-                        else if (t == 1)
-                        {
-                            ShowPlacement(newTile);
-                        }
-                        else
-                        {
+                            CanInstantiate = true;
+                            if (t == 0)
+                            {
+                                ShowPlacement(currentTile);
+                                _neighbourTile = newTile;
+                            }
+                            else if (t == 1)
+                            {
+                                ShowPlacement(newTile);
+                                _neighbourTile = currentTile;
+                            }
+                            else
+                            {
 
+                            }
                         }
                     }
                 }
@@ -54,7 +65,7 @@ namespace ProjectCore.Grid
 
         private void ShowPlacement(GridTile StratTile)
         {
-
+            _startingTile = StratTile;
         }
     }
 }

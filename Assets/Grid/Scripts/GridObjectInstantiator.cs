@@ -11,6 +11,6 @@ namespace ProjectCore.Grid
         protected bool CanInstantiate;
 
         public abstract void CheckForLocation(GridTile currentTile);
-        public abstract void InstantiateObject();
+        public abstract void InstantiateObject(Transform parent);
     }
 }

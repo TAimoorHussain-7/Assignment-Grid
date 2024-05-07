@@ -524,11 +524,12 @@ MonoBehaviour:
   mainCamera: {fileID: 963194227}
   tileLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   RayCastLength: 100
   Editing: {fileID: 11400000, guid: 7252927e7f1a4fb4d9c69212bda3fab6, type: 2}
   RayCastEvent: {fileID: 11400000, guid: 370a57c7dfa3f794bb2c8428eb6e063e, type: 2}
   CurrentObject: {fileID: 11400000, guid: 96223c0e94c5f1a4fbc3fc97ca99a9cb, type: 2}
+  BuildingsParent: {fileID: 1381815895}
 --- !u!1 &309985566
 GameObject:
   m_ObjectHideFlags: 0
