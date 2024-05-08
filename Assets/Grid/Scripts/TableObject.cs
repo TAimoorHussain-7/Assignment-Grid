@@ -7,26 +7,31 @@ namespace ProjectCore.Grid
     {
         [SerializeField] Vector2Int[] MyNeighbours;
 
-        private GridTile _startingTile, _neighbourTile;
+        GridTile _startingTile, _neighbourTile;
+        GridObjectView _newObj;
+
         
-        public override void CheckForLocation(GridTile currentTile)
+        public override void CheckForLocation(GridTile currentTile, Transform parent)
         {
             CanInstantiate = false;
             _startingTile = null;
+            ObjectParent = parent;
             if (currentTile.TileId == RequiredTileId)
             {
                 CheckAvailableNeighbour(currentTile);
             }
         }
 
-        public override void InstantiateObject(Transform parent)
+        public override void InstantiateObject()
         {
             if (CanInstantiate)
             {
                 _startingTile.IsOccupied = true;
                 _neighbourTile.IsOccupied = true;
-                GameObject newObj = Instantiate(CurrentObj, parent);
-                newObj.transform.position = _startingTile.transform.position;
+                GridTile[] objectLocation = new GridTile[2];
+                objectLocation[0] = _startingTile;
+                objectLocation[1] = _neighbourTile;
+                _newObj.ActiveObject(objectLocation);
             }
         }
 
@@ -42,7 +47,6 @@ namespace ProjectCore.Grid
                         GridTile newTile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
                         if (newTile.TileId == RequiredTileId && !newTile.IsOccupied)
                         {
-                            CanInstantiate = true;
                             if (t == 0)
                             {
                                 ShowPlacement(currentTile);
@@ -66,6 +70,12 @@ namespace ProjectCore.Grid
         private void ShowPlacement(GridTile StratTile)
         {
             _startingTile = StratTile;
+            if (_newObj == null)
+            {
+                _newObj = Instantiate(CurrentObj, ObjectParent);
+            }
+            _newObj.transform.position = _startingTile.transform.position;
+            CanInstantiate = true;
         }
     }
 }

@@ -5,12 +5,13 @@ namespace ProjectCore.Grid
     public abstract class GridObjectInstantiator : ScriptableObject
     {
         [SerializeField] protected ProjectGrid CurrentGrid;
-        [SerializeField] protected GameObject CurrentObj;
+        [SerializeField] protected GridObjectView CurrentObj;
         [SerializeField] protected int RequiredTileId;
 
         protected bool CanInstantiate;
+        protected Transform ObjectParent;
 
-        public abstract void CheckForLocation(GridTile currentTile);
-        public abstract void InstantiateObject(Transform parent);
+        public abstract void CheckForLocation(GridTile currentTile, Transform parent);
+        public abstract void InstantiateObject();
     }
 }

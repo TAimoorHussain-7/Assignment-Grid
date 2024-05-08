@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466864727495174569}
   - component: {fileID: 1016506553811123815}
+  - component: {fileID: 7480765280421400264}
   m_Layer: 0
   m_Name: VerticalTable
   m_TagString: Untagged
@@ -54,6 +55,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 0.01}
   m_Center: {x: 0.5, y: 0, z: 0}
+--- !u!114 &7480765280421400264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522884240086887124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bd0adaaa89d6c4b9e60e15b7fab9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectBody: {fileID: 47411102305470218}
 --- !u!1 &5028485797499908865
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +142,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -1729826622, guid: 4add036dfaa5565478af164e3862738c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

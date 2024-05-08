@@ -13,7 +13,7 @@ namespace ProjectCore.Grid
         [SerializeField] SOBool Editing;
         [SerializeField] SOEvents RayCastEvent;
         [SerializeField] GridObjectHolderSO CurrentObject;
-        [SerializeField] Transform BuildingsParent;
+        [SerializeField] SOTransform ObjectParent;
 
         private Coroutine RaycastRotine;
         private GridTile lastHighlightedTile;
@@ -30,6 +30,7 @@ namespace ProjectCore.Grid
 
         private void StartRayCasting()
         {
+
             RaycastRotine = StartCoroutine(RayCasting());
         }
 
@@ -55,13 +56,14 @@ namespace ProjectCore.Grid
                         // Highlight the selected tile
                         selectedTile.HighlightTile();
                         lastHighlightedTile = selectedTile;
-                        CurrentObject.GridObject.CheckForLocation(selectedTile);
+                        if (CurrentObject.GridObject != null && ObjectParent.Component != null)
+                        { CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); }
                     }
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
                 {
-                    CurrentObject.GridObject.InstantiateObject(BuildingsParent);
+                    CurrentObject.GridObject.InstantiateObject();
                 }
 
                 yield return new WaitForSeconds(0.01f);
