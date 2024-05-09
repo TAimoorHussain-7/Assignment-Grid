@@ -45,10 +45,13 @@ namespace ProjectCore.Grid
             }
         }
 
-        public void DestroyObject()
+        public override void DestroyObject()
         {
-            Destroy(_newObj.gameObject);
-            _newObj = null;
+            if (_newObj != null)
+            {
+                Destroy(_newObj.gameObject);
+                _newObj = null;
+            }
         }
 
         private void CheckAvailableNeighbour(GridTile currentTile)
