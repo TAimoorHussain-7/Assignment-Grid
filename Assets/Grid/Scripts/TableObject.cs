@@ -6,10 +6,11 @@ namespace ProjectCore.Grid
     public class TableObject : GridObjectInstantiator
     {
         [SerializeField] Vector2Int[] MyNeighbours;
+        [SerializeField] GridObjectView VerticalTable;
 
         GridTile _startingTile, _neighbourTile;
         GridObjectView _newObj;
-
+        bool _isHorizontalTable = true;
         
         public override void CheckForLocation(GridTile currentTile, Transform parent)
         {
@@ -40,12 +41,14 @@ namespace ProjectCore.Grid
                 objectLocation[1] = _neighbourTile;
                 _newObj.ActiveObject(objectLocation);
                 _newObj = null;
+                CanInstantiate = false;
             }
         }
 
         public void DestroyObject()
         {
-            Destroy(_newObj);
+            Destroy(_newObj.gameObject);
+            _newObj = null;
         }
 
         private void CheckAvailableNeighbour(GridTile currentTile)
@@ -55,24 +58,30 @@ namespace ProjectCore.Grid
                 for (int t = 0; t < MyNeighbours.Length; t++)
                 {
                     Vector2Int nextTile = new Vector2Int(currentTile.xIndex + MyNeighbours[t].x, currentTile.yIndex + MyNeighbours[t].y);
-                    if (nextTile.x < CurrentGrid.GridTiles.Length && nextTile.y < CurrentGrid.GridTiles[nextTile.x].TilesRow.Count)
+                    if (nextTile.x > -1 && nextTile.x < CurrentGrid.GridTiles.Length && nextTile.y > -1 && nextTile.y < CurrentGrid.GridTiles[nextTile.x].TilesRow.Count)
                     {
                         GridTile newTile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
                         if (newTile.TileId == RequiredTileId && !newTile.IsOccupied)
                         {
                             if (t == 0)
                             {
-                                ShowPlacement(currentTile);
+                                ShowHorizontalPlacement(currentTile);
                                 _neighbourTile = newTile;
                             }
                             else if (t == 1)
                             {
-                                ShowPlacement(newTile);
+                                ShowHorizontalPlacement(newTile);
                                 _neighbourTile = currentTile;
                             }
-                            else
+                            else if (t == 2)
                             {
-
+                                ShowVerticalPlacement(currentTile);
+                                _neighbourTile = newTile;
+                            }
+                            else if (t == 3)
+                            {
+                                ShowVerticalPlacement(newTile);
+                                _neighbourTile = currentTile;
                             }
                         }
                     }
@@ -80,13 +89,40 @@ namespace ProjectCore.Grid
             }
         }
 
-        private void ShowPlacement(GridTile StratTile)
+        private void ShowHorizontalPlacement(GridTile StratTile)
         {
             _startingTile = StratTile;
+
+            if(!_isHorizontalTable && _newObj != null)
+            {
+                DestroyObject();
+            }
+
             if (_newObj == null)
             {
                 _newObj = Instantiate(CurrentObj, _startingTile.transform.position, _startingTile.transform.rotation);
                 _newObj.transform.SetParent(ObjectParent);
+                _isHorizontalTable = true;
+            }
+            _newObj.transform.position = _startingTile.transform.position;
+            _newObj.HighlightObject();
+           CanInstantiate = true;
+        }
+
+        private void ShowVerticalPlacement(GridTile StratTile)
+        {
+            _startingTile = StratTile;
+
+            if(_isHorizontalTable && _newObj != null)
+            {
+                DestroyObject();
+            }
+
+            if (_newObj == null)
+            {
+                _newObj = Instantiate(VerticalTable, _startingTile.transform.position, _startingTile.transform.rotation);
+                _newObj.transform.SetParent(ObjectParent);
+                _isHorizontalTable = false;
             }
             _newObj.transform.position = _startingTile.transform.position;
             _newObj.HighlightObject();
