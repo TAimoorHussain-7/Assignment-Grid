@@ -19,5 +19,19 @@ namespace ProjectCore.Grid
             color.a = 1;
             ObjectBody.color = color;
         }
+
+        public void HideObject()
+        {
+            Color color = ObjectBody.color;
+            color.a = 0;
+            ObjectBody.color = color;
+        }
+
+        public void HighlightObject()
+        {
+            Color color = ObjectBody.color;
+            color.a = 0.5f;
+            ObjectBody.color = color;
+        }
     }
 }

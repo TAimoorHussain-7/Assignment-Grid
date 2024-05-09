@@ -20,6 +20,13 @@ namespace ProjectCore.Grid
             {
                 CheckAvailableNeighbour(currentTile);
             }
+            else
+            {
+                if (_newObj != null)
+                {
+                    _newObj.HideObject();
+                }
+            }
         }
 
         public override void InstantiateObject()
@@ -32,7 +39,13 @@ namespace ProjectCore.Grid
                 objectLocation[0] = _startingTile;
                 objectLocation[1] = _neighbourTile;
                 _newObj.ActiveObject(objectLocation);
+                _newObj = null;
             }
+        }
+
+        public void DestroyObject()
+        {
+            Destroy(_newObj);
         }
 
         private void CheckAvailableNeighbour(GridTile currentTile)
@@ -72,10 +85,12 @@ namespace ProjectCore.Grid
             _startingTile = StratTile;
             if (_newObj == null)
             {
-                _newObj = Instantiate(CurrentObj, ObjectParent);
+                _newObj = Instantiate(CurrentObj, _startingTile.transform.position, _startingTile.transform.rotation);
+                _newObj.transform.SetParent(ObjectParent);
             }
             _newObj.transform.position = _startingTile.transform.position;
-            CanInstantiate = true;
+            _newObj.HighlightObject();
+           CanInstantiate = true;
         }
     }
 }
