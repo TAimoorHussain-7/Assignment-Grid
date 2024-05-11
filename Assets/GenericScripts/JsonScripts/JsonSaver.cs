@@ -15,8 +15,8 @@ namespace ProjectCore.Data.Json
                 int fileNumber = 1;
                 while (File.Exists(filePath))
                 {
-                    fileName = fileName + "_" + fileNumber;
-                    filePath = Path.Combine(jsonPath, fileName + ".json");
+                    string newName = fileName + "_" + fileNumber;
+                    filePath = Path.Combine(jsonPath, newName + ".json");
                     fileNumber++;
                 }
 

@@ -6,10 +6,11 @@ namespace ProjectCore.Variables
 
     public class SoGameObject : ScriptableObject
     {
-        [SerializeField] GameObject NewObj, DefaultValue;
-        public GameObject Obj { get => NewObj; set => NewObj = value; }
-
+        [SerializeField] GameObject DefaultValue;
         [SerializeField] bool ResetDefault = true;
+
+        public GameObject Obj { get; set; }
+
 
         private void OnEnable()
         {
