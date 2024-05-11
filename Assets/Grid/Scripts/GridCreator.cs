@@ -60,15 +60,9 @@ namespace ProjectCore.Grid
             {
                 foreach (GridBuilingBlock building in gridData.GridBuildings)
                 {
-                    GameObject newBuilding = Instantiate(BuildingPrefabs.Objects[building.BuildingId], buildingParent);
-                    for (int b = 0; b<building.TilesOccupied.Count; b++)
-                    {
-                        GridTile tempTile = CurrentGrid.GridRows[building.TilesOccupied[b].x].TilesRow[building.TilesOccupied[b].y];
-                        newBuilding.transform.position = tempTile.transform.position;
-                        if(b == 0)
-                            tempTile.IsOccupied = true;
-                    }
-                    CurrentGrid.GridBuildings.Add(building);
+                    GridObjectView newBuilding = Instantiate(BuildingPrefabs.Objects[building.BuildingId], buildingParent).GetComponent<GridObjectView>();
+                    newBuilding.transform.position = CurrentGrid.GridRows[building.TilesOccupied[0].x].TilesRow[building.TilesOccupied[0].y].transform.position;
+                    newBuilding.ActiveObject(building);
                 }
             }
             else

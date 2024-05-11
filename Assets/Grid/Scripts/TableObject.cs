@@ -7,14 +7,14 @@ namespace ProjectCore.Grid
     public class TableObject : GridObjectInstantiator
     {
         [SerializeField] Vector2Int[] MyNeighbours;
-        [SerializeField] GridObjectView VerticalTable;
+        [SerializeField] GridObjectInstantiator OtherTable;
         [SerializeField] GridDataSO CurrentGrid;
         [SerializeField] SoGameObject GridObj;
+        [SerializeField] GridObjectHolderSO ObjectHolder;
         [SerializeField] int BuildingId;
 
         GridTile _neighbourTile;
         GridObjectView _newObj;
-        bool _isCurrentTable = true;
 
         public override void CheckForLocation(GridTile currentTile, Transform parent)
         {
@@ -41,20 +41,14 @@ namespace ProjectCore.Grid
         {
             if (CanInstantiate)
             {
-                StartingTile.IsOccupied = true;
-                _neighbourTile.IsOccupied = true;
-                GridTile[] objectLocation = new GridTile[2];
-                objectLocation[0] = StartingTile;
-                objectLocation[1] = _neighbourTile;
-                _newObj.ActiveObject(objectLocation);
+                CanInstantiate = false;
                 GridBuilingBlock newTable = new GridBuilingBlock();
                 newTable.TilesOccupied.Add(new Vector2Int(StartingTile.XIndex, StartingTile.YIndex));
                 newTable.TilesOccupied.Add(new Vector2Int(_neighbourTile.XIndex, _neighbourTile.YIndex));
                 newTable.BuildingId = BuildingId;
-                CurrentGrid.GridBuildings.Add(newTable);
+                _newObj.ActiveObject(newTable);
                 _newObj = null;
                 GridObj.Obj = null;
-                CanInstantiate = false;
             }
         }
 
@@ -80,15 +74,11 @@ namespace ProjectCore.Grid
                                 ShowCurrentTablePlacement(newTile);
                                 _neighbourTile = currentTile;
                             }
-                            else if (t == 2)
+                            else
                             {
-                                ShowOtherTablePlacement(currentTile);
-                                _neighbourTile = newTile;
-                            }
-                            else if (t == 3)
-                            {
-                                ShowOtherTablePlacement(newTile);
-                                _neighbourTile = currentTile;
+                                DestroyNewObj();
+                                ObjectHolder.GridObject = OtherTable;
+                                OtherTable.CheckForLocation(currentTile,ObjectParent);
                             }
                             return;
                         }
@@ -103,38 +93,11 @@ namespace ProjectCore.Grid
         {
             StartingTile = StratTile;
 
-            if(!_isCurrentTable && _newObj != null)
-            {
-                DestroyNewObj();
-            }
-
             if (_newObj == null)
             {
                 GridObj.Obj = Instantiate(CurrentObj, StartingTile.transform.position, StartingTile.transform.rotation);
                 _newObj = GridObj.Obj.GetComponent<GridObjectView>();
                 _newObj.transform.SetParent(ObjectParent);
-                _isCurrentTable = true;
-            }
-            _newObj.transform.position = StartingTile.transform.position;
-            _newObj.HighlightObject();
-           CanInstantiate = true;
-        }
-
-        private void ShowOtherTablePlacement(GridTile StratTile)
-        {
-            StartingTile = StratTile;
-
-            if(_isCurrentTable && _newObj != null)
-            {
-                DestroyNewObj();
-            }
-
-            if (_newObj == null)
-            {
-                _newObj = Instantiate(VerticalTable, StartingTile.transform.position, StartingTile.transform.rotation);
-                GridObj.Obj = _newObj.gameObject;
-                _newObj.transform.SetParent(ObjectParent);
-                _isCurrentTable = false;
             }
             _newObj.transform.position = StartingTile.transform.position;
             _newObj.HighlightObject();

@@ -13,7 +13,7 @@ namespace ProjectCore.Grid
         [SerializeField] SOBool Editing;
         [SerializeField] SoGameObject NewGridObj;
         [SerializeField] SOEvents RayCastEvent;
-        [SerializeField] GridObjectHolderSO CurrentObject;
+        [SerializeField] GridObjectHolderSO ObjectHoler;
         [SerializeField] SOTransform ObjectParent;
 
         Coroutine _raycastRotine;
@@ -47,11 +47,7 @@ namespace ProjectCore.Grid
                 {
                     if (hit.collider.CompareTag("GridTile"))
                     {
-                        if (_lastHighlightedObj != null)
-                        {
-                            _lastHighlightedObj.ShowFullView();
-                            _lastHighlightedObj = null;
-                        }
+                        ClearTileView();
                         GridTile selectedTile = hit.collider.GetComponent<GridTile>();
                         if (selectedTile != _lastHighlightedTile)
                         {
@@ -62,28 +58,24 @@ namespace ProjectCore.Grid
                             }
                             selectedTile.HighlightTile(1);
                             _lastHighlightedTile = selectedTile;
-                            if (CurrentObject.GridObject != null && ObjectParent.Component != null)
+                            if (ObjectHoler.GridObject != null && ObjectParent.Component != null)
                             {
-                                CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); 
+                                ObjectHoler.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); 
                             }
                         }
 
-                        Debug.Log("GridTile");
-                        if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
+                        //Debug.Log("GridTile");
+                        if (Input.GetMouseButtonDown(0) && ObjectHoler.GridObject != null)
                         {
-                            CurrentObject.GridObject.InstantiateObject();
+                            ObjectHoler.GridObject.InstantiateObject();
                         }
                     }
                     else if (hit.collider.CompareTag("GridObj"))
                     {
-                        if (_lastHighlightedTile != null)
-                        {
-                            _lastHighlightedTile.RemoveHighlight();
-                            _lastHighlightedTile = null;
-                        }
+                        ClearTileView();
                         GridObjectView selectedObj = hit.collider.GetComponent<GridObjectView>();
-                        Debug.Log(selectedObj);
-                        Debug.Log(_lastHighlightedObj);
+                        //Debug.Log(selectedObj);
+                        //Debug.Log(_lastHighlightedObj);
                         if (selectedObj != _lastHighlightedObj)
                         {
                             if (_lastHighlightedObj != null)
@@ -94,7 +86,7 @@ namespace ProjectCore.Grid
                             selectedObj.HighlightObject();
                             _lastHighlightedObj = selectedObj;
                         }
-                        Debug.Log("GridObj");
+                        //Debug.Log("GridObj");
                         if (Input.GetMouseButtonDown(1) && selectedObj != null)
                         {
                             selectedObj.RemoveObject();
@@ -103,7 +95,23 @@ namespace ProjectCore.Grid
                 }
                 yield return new WaitForSeconds(0.002f);
             }
+            ClearTileView();
             StopRayCasting();
+        }
+
+        void ClearTileView()
+        {
+            if (_lastHighlightedTile != null)
+            {
+                _lastHighlightedTile.RemoveHighlight();
+                _lastHighlightedTile = null;
+            }
+
+            if (_lastHighlightedObj != null)
+            {
+                _lastHighlightedObj.ShowFullView();
+                _lastHighlightedObj = null;
+            }
         }
 
         private void StopRayCasting()

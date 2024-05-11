@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileObj: {fileID: 926605761141196420, guid: d3efa9ec94172f44890fa54b86447424, type: 3}
   TilePrefabs: {fileID: 11400000, guid: 43822e272d699c445a39d91654494cac, type: 2}
+  BuildingPrefabs: {fileID: 11400000, guid: 840e6c5e1bfcfea498ab80ec87b7866e, type: 2}
   CreatingGrid: {fileID: 11400000, guid: 5c9f7cbef390f434397327131519bcd0, type: 2}
   CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}

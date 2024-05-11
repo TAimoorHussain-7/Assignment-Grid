@@ -12,7 +12,7 @@ namespace ProjectCore.Grid
 
     public class GridJsonData
     {
-        public List<List<GridTileIndex>> TerrainGrid = new List<List<GridTileIndex>>();
+        public List<List<GridTileIndex>> TerrainGrid;
         public List<GridBuilingBlock> GridBuildings = new List<GridBuilingBlock>();
     }
 

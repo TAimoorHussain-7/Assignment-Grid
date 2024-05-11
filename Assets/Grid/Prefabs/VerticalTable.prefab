@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectBody: {fileID: 47411102305470218}
   ObjectCollider: {fileID: 1016506553811123815}
+  CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}
 --- !u!1 &5028485797499908865
 GameObject:
   m_ObjectHideFlags: 0

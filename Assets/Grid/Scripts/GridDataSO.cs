@@ -8,5 +8,10 @@ namespace ProjectCore.Grid
     {
         public GridRow[] GridRows;
         public List<GridBuilingBlock> GridBuildings;
+
+        private void OnEnable()
+        {
+            GridBuildings = new List<GridBuilingBlock>();
+        }
     }
 }

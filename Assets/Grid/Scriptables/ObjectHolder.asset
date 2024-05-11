@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cc0dbc07f7f9494abc6f89d2d5ec6ad, type: 3}
-  m_Name: CurrentObject
+  m_Name: ObjectHolder
   m_EditorClassIdentifier: 
   GridObject: {fileID: 11400000, guid: dea6ed5fe20d9c843b0ac5ab8ebd2127, type: 2}

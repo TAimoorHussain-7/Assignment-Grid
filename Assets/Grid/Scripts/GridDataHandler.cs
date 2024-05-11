@@ -1,13 +1,27 @@
 using UnityEngine;
 using ProjectCore.Grid;
+using ProjectCore.Events;
 using ProjectCore.Data.Json;
+using System.Collections.Generic;
 
 public class GridDataHandler : MonoBehaviour
 {
-    [SerializeField] JsonParser JsonMan;
+    [SerializeField] JsonManager JsonMan;
     [SerializeField] GridJsonDataSO GridJsonData;
     [SerializeField] GridDataSO CurrentGrid;
-    [SerializeField] string JsonFilePath;
+    [SerializeField] SOEvents SaveGridEvent;
+    [SerializeField] string JsonFilePath, JsonPath, JsonFileName;
+
+
+    private void OnEnable()
+    {
+        SaveGridEvent.Handler += SaveGridData;
+    }
+
+    private void OnDisable()
+    {
+        SaveGridEvent.Handler -= SaveGridData;
+    }
 
     void Start()
     {
@@ -23,20 +37,36 @@ public class GridDataHandler : MonoBehaviour
     GridJsonData ConvertGridDataToObject()
     {
         GridJsonData newGrid = new GridJsonData();
-        if (CurrentGrid.GridRows.Length > 0)
+        newGrid.TerrainGrid = new List<List<GridTileIndex>>();
+        foreach (GridRow row in CurrentGrid.GridRows)
         {
-            for (int r = 0; r < CurrentGrid.GridRows.Length; r++) 
-            { 
-                for (int c = 0; c < CurrentGrid.GridRows[r].TilesRow.Count; c++)
-                {
-
-                }
+            List<GridTileIndex> tileIndices = new List<GridTileIndex>();
+            foreach (GridTile tile in row.TilesRow)
+            {
+                GridTileIndex tileIndex = new GridTileIndex();
+                tileIndex.TileType = tile.TileId;
+                tileIndices.Add(tileIndex);
             }
+            newGrid.TerrainGrid.Add(tileIndices);
         }
-        else
+
+        // Convert GridBuildings
+        newGrid.GridBuildings = new List<GridBuilingBlock>();
+        foreach (GridBuilingBlock buildingBlock in CurrentGrid.GridBuildings)
         {
-            Debug.LogError("No GridData Available to convert");
+            GridBuilingBlock newBuildingBlock = new GridBuilingBlock();
+            newBuildingBlock.BuildingId = buildingBlock.BuildingId;
+            foreach (Vector2Int tilePos in buildingBlock.TilesOccupied)
+            {
+                newBuildingBlock.TilesOccupied.Add(tilePos);
+            }
+            newGrid.GridBuildings.Add(newBuildingBlock);
         }
         return newGrid;
+    }
+
+    void SaveGridData()
+    {
+        JsonMan.SaveJson<GridJsonData>(ConvertGridDataToObject(),JsonPath,JsonFileName);
     }
 }

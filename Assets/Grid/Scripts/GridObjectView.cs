@@ -6,16 +6,15 @@ namespace ProjectCore.Grid
     {
         [SerializeField] SpriteRenderer ObjectBody;
         [SerializeField] BoxCollider ObjectCollider;
+        [SerializeField] GridDataSO CurrentGrid;
         
-        GridTile[] _objectLocation;
+        GridBuilingBlock _myBlock;
 
-        public void ActiveObject(GridTile[] objectLocation)
+        public void ActiveObject(GridBuilingBlock myBlock)
         {
-            _objectLocation = objectLocation;
-            foreach (GridTile tile in _objectLocation)
-            {
-                tile.IsOccupied = true;
-            }
+            _myBlock = myBlock;
+            ChangeTilesState(true);
+            CurrentGrid.GridBuildings.Add(_myBlock);
             ShowFullView();
             ObjectCollider.enabled = true;
         }
@@ -36,7 +35,7 @@ namespace ProjectCore.Grid
 
         public void HighlightObject()
         {
-            Debug.Log("Hiegh");
+            //Debug.Log("Hiegh");
             Color color = ObjectBody.color;
             color.a = 0.5f;
             ObjectBody.color = color;
@@ -45,11 +44,17 @@ namespace ProjectCore.Grid
         public void RemoveObject()
         {
             //Debug.Log("Here");
-            foreach (GridTile tile in _objectLocation)
-            {
-                tile.IsOccupied = false;
-            }
+            ChangeTilesState(false);
+            CurrentGrid.GridBuildings.Remove(_myBlock);
             Destroy(this.gameObject);
+        }
+
+        void ChangeTilesState(bool State)
+        {
+            foreach (Vector2Int tileIndex in _myBlock.TilesOccupied)
+            {
+                CurrentGrid.GridRows[tileIndex.x].TilesRow[tileIndex.y].IsOccupied = State;
+            }
         }
     }
 }

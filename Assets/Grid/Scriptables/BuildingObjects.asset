@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 097adb31add4f104f8718bf0f1dd032c, type: 3}
-  m_Name: TilesObject
+  m_Name: BuildingObjects
   m_EditorClassIdentifier: 
   Objects:
-  - {fileID: 1992712569568817942, guid: fd0ed671d5dfebf41b335618c7579c2c, type: 3}
-  - {fileID: 5603496098552800117, guid: f64f2fe145b65de4e99b17be03fd0cd1, type: 3}
-  - {fileID: 4720611330182996803, guid: 3f244f86d3bbc04418f37126595982ac, type: 3}
-  - {fileID: 5327623510547402660, guid: 92ad8e2fedbca8545807fcf81d870799, type: 3}
+  - {fileID: 3522884240086887124, guid: 110a96dcf1d858a4f9d067c21dd77872, type: 3}
+  - {fileID: 3522884240086887124, guid: 0d8690ecd41b72c47b3a797e966a3c9d, type: 3}
