@@ -13,10 +13,11 @@ namespace ProjectCore.Grid
                 StartingTile = currentTile;
                 CanInstantiate = true;
             }
-        }
-
-        public override void DestroyObject()
-        {
+            else
+            {
+                currentTile.RemoveHighlight();
+                currentTile.HighlightTile(0);
+            }
         }
 
         public override void InstantiateObject()
@@ -24,7 +25,7 @@ namespace ProjectCore.Grid
             if (CanInstantiate)
             {
                 ObjectParent = StartingTile.transform;
-                Destroy(ObjectParent.GetChild(1).gameObject);
+                Destroy(ObjectParent.GetChild(2).gameObject);
                 Instantiate(CurrentObj, ObjectParent);
                 StartingTile.TileId = RequiredTileId;
                 CanInstantiate = false;

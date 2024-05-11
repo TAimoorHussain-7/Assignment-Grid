@@ -488,8 +488,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 530a11162fb6d7548ba34dd7864e9712, type: 2}
-        m_TargetAssemblyTypeName: ProjectCore.Grid.FloorObject, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SoGameObject, Assembly-CSharp
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -1117,8 +1117,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 4a9fd9684ba46d14292f3dd1f53dbed5, type: 2}
-        m_TargetAssemblyTypeName: ProjectCore.Grid.FloorObject, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SoGameObject, Assembly-CSharp
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -1949,7 +1949,7 @@ GameObject:
   - component: {fileID: 856305086}
   - component: {fileID: 856305085}
   m_Layer: 5
-  m_Name: Table
+  m_Name: HorizontalTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1971,8 +1971,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 425, y: 0}
-  m_SizeDelta: {x: 217, y: 165}
+  m_AnchoredPosition: {x: 425, y: -0}
+  m_SizeDelta: {x: 208.375, y: 115.764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &856305085
 MonoBehaviour:
@@ -2018,8 +2018,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: dea6ed5fe20d9c843b0ac5ab8ebd2127, type: 2}
-        m_TargetAssemblyTypeName: ProjectCore.Grid.TableObject, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SoGameObject, Assembly-CSharp
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -2075,7 +2075,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -655447826, guid: 4add036dfaa5565478af164e3862738c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 194cc15f0741a7344bdf9462f6aea453, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2335,8 +2335,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: a4c2c75fb393690428c714c5036af85a, type: 2}
-        m_TargetAssemblyTypeName: ProjectCore.Grid.FloorObject, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SoGameObject, Assembly-CSharp
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -2442,6 +2442,163 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1111728809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111728810}
+  - component: {fileID: 1111728813}
+  - component: {fileID: 1111728812}
+  - component: {fileID: 1111728811}
+  m_Layer: 5
+  m_Name: VerticleTable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1111728810
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111728809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1905105082}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 639, y: -0}
+  m_SizeDelta: {x: 131.326, y: 170.169}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1111728811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111728809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1111728812}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SoGameObject, Assembly-CSharp
+        m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: de4afc7f2240372429090f2e3f459257, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SOTransform, Assembly-CSharp
+        m_MethodName: set_Component
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1381815895}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 96223c0e94c5f1a4fbc3fc97ca99a9cb, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Grid.GridObjectHolderSO, Assembly-CSharp
+        m_MethodName: set_GridObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c1877c72d218bfc4baf0fa2d8c5d46fa, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ProjectCore.Grid.GridObjectInstantiator,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1111728812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111728809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: eefa636f1cbd9d64396baad2042808a4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1111728813
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111728809}
+  m_CullTransparentMesh: 1
 --- !u!1 &1222308101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,8 +2717,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 46078e75fad6df540ae635482735628b, type: 2}
-        m_TargetAssemblyTypeName: ProjectCore.Grid.FloorObject, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+        m_TargetAssemblyTypeName: ProjectCore.Variables.SoGameObject, Assembly-CSharp
         m_MethodName: DestroyObject
         m_Mode: 1
         m_Arguments:
@@ -2699,6 +2856,7 @@ RectTransform:
   - {fileID: 498031021}
   - {fileID: 240539540}
   - {fileID: 856305084}
+  - {fileID: 1111728810}
   m_Father: {fileID: 832139380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

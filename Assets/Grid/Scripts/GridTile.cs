@@ -7,15 +7,19 @@ namespace ProjectCore.Grid
         public int TileId, xIndex, yIndex;
         public bool IsOccupied = false;
 
-        [SerializeField] GameObject HighlightedObj;
+        [SerializeField] GameObject HighlightedObj, BlockSign;
 
-        public void HighlightTile()
+        public void HighlightTile(int i)
         {
-            HighlightedObj.SetActive(true);
+            if (i == 0)
+                BlockSign.SetActive(true);
+            else if(i == 1)
+                HighlightedObj.SetActive(true);
         }
         public void RemoveHighlight()
         {
             HighlightedObj.SetActive(false);
+            BlockSign.SetActive(false);
         }
     }
 }

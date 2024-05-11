@@ -13,6 +13,5 @@ namespace ProjectCore.Grid
 
         public abstract void CheckForLocation(GridTile currentTile, Transform parent);
         public abstract void InstantiateObject();
-        public abstract void DestroyObject();
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using ProjectCore.Variables;
 
 namespace ProjectCore.Grid
 {
@@ -8,22 +9,26 @@ namespace ProjectCore.Grid
         [SerializeField] Vector2Int[] MyNeighbours;
         [SerializeField] GridObjectView VerticalTable;
         [SerializeField] ProjectGrid CurrentGrid;
+        [SerializeField] SoGameObject GridObj;
 
         GridTile _neighbourTile;
         GridObjectView _newObj;
-        bool _isHorizontalTable = true;
+        bool _isCurrentTable = true;
 
         public override void CheckForLocation(GridTile currentTile, Transform parent)
         {
             CanInstantiate = false;
             StartingTile = null;
             ObjectParent = parent;
-            if (currentTile.TileId == RequiredTileId)
+            if (!currentTile.IsOccupied && currentTile.TileId == RequiredTileId)
             {
                 CheckAvailableNeighbour(currentTile);
             }
             else
             {
+                currentTile.RemoveHighlight();
+                currentTile.HighlightTile(0);
+
                 if (_newObj != null)
                 {
                     _newObj.HideObject();
@@ -42,16 +47,8 @@ namespace ProjectCore.Grid
                 objectLocation[1] = _neighbourTile;
                 _newObj.ActiveObject(objectLocation);
                 _newObj = null;
+                GridObj.Obj = null;
                 CanInstantiate = false;
-            }
-        }
-
-        public override void DestroyObject()
-        {
-            if (_newObj != null)
-            {
-                Destroy(_newObj.gameObject);
-                _newObj = null;
             }
         }
 
@@ -69,68 +66,79 @@ namespace ProjectCore.Grid
                         {
                             if (t == 0)
                             {
-                                ShowHorizontalPlacement(currentTile);
+                                ShowCurrentTablePlacement(currentTile);
                                 _neighbourTile = newTile;
                             }
                             else if (t == 1)
                             {
-                                ShowHorizontalPlacement(newTile);
+                                ShowCurrentTablePlacement(newTile);
                                 _neighbourTile = currentTile;
                             }
                             else if (t == 2)
                             {
-                                ShowVerticalPlacement(currentTile);
+                                ShowOtherTablePlacement(currentTile);
                                 _neighbourTile = newTile;
                             }
                             else if (t == 3)
                             {
-                                ShowVerticalPlacement(newTile);
+                                ShowOtherTablePlacement(newTile);
                                 _neighbourTile = currentTile;
                             }
+                            return;
                         }
                     }
                 }
+                currentTile.RemoveHighlight();
+                currentTile.HighlightTile(0);
             }
         }
 
-        private void ShowHorizontalPlacement(GridTile StratTile)
+        private void ShowCurrentTablePlacement(GridTile StratTile)
         {
             StartingTile = StratTile;
 
-            if(!_isHorizontalTable && _newObj != null)
+            if(!_isCurrentTable && _newObj != null)
             {
-                DestroyObject();
+                DestroyNewObj();
             }
 
             if (_newObj == null)
             {
-                _newObj = Instantiate(CurrentObj, StartingTile.transform.position, StartingTile.transform.rotation).GetComponent<GridObjectView>();
+                GridObj.Obj = Instantiate(CurrentObj, StartingTile.transform.position, StartingTile.transform.rotation);
+                _newObj = GridObj.Obj.GetComponent<GridObjectView>();
                 _newObj.transform.SetParent(ObjectParent);
-                _isHorizontalTable = true;
+                _isCurrentTable = true;
             }
             _newObj.transform.position = StartingTile.transform.position;
             _newObj.HighlightObject();
            CanInstantiate = true;
         }
 
-        private void ShowVerticalPlacement(GridTile StratTile)
+        private void ShowOtherTablePlacement(GridTile StratTile)
         {
             StartingTile = StratTile;
 
-            if(_isHorizontalTable && _newObj != null)
+            if(_isCurrentTable && _newObj != null)
             {
-                DestroyObject();
+                DestroyNewObj();
             }
 
             if (_newObj == null)
             {
                 _newObj = Instantiate(VerticalTable, StartingTile.transform.position, StartingTile.transform.rotation);
+                GridObj.Obj = _newObj.gameObject;
                 _newObj.transform.SetParent(ObjectParent);
-                _isHorizontalTable = false;
+                _isCurrentTable = false;
             }
             _newObj.transform.position = StartingTile.transform.position;
             _newObj.HighlightObject();
            CanInstantiate = true;
+        }
+
+        private void DestroyNewObj()
+        {
+            GridObj.DestroyObject();
+            _newObj = null;
         }
     }
 }

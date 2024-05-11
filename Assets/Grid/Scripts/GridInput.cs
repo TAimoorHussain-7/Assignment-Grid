@@ -54,7 +54,7 @@ namespace ProjectCore.Grid
                         }
 
                         // Highlight the selected tile
-                        selectedTile.HighlightTile();
+                        selectedTile.HighlightTile(1);
                         lastHighlightedTile = selectedTile;
                         if (CurrentObject.GridObject != null && ObjectParent.Component != null)
                         { CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); }
@@ -65,7 +65,7 @@ namespace ProjectCore.Grid
                         CurrentObject.GridObject.InstantiateObject();
                     }
                 }
-                yield return new WaitForSeconds(0.005f);
+                yield return new WaitForSeconds(0.002f);
             }
             StopRayCasting();
         }
