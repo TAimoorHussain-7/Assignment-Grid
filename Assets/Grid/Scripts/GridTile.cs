@@ -4,8 +4,21 @@ namespace ProjectCore.Grid
 {
     public class GridTile: MonoBehaviour
     {
+        bool _isOccupied = false;
+
+        [SerializeField] BoxCollider TileColider;
+
         public int TileId, xIndex, yIndex;
-        public bool IsOccupied = false;
+
+        public bool IsOccupied 
+        {
+            get => _isOccupied;
+            set
+            {
+                TileColider.enabled = !value;
+                _isOccupied = value;
+            }
+        }
 
         [SerializeField] GameObject HighlightedObj, BlockSign;
 

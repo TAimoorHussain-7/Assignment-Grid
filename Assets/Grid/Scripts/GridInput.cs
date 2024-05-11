@@ -15,8 +15,10 @@ namespace ProjectCore.Grid
         [SerializeField] GridObjectHolderSO CurrentObject;
         [SerializeField] SOTransform ObjectParent;
 
-        private Coroutine RaycastRotine;
-        private GridTile lastHighlightedTile;
+        Coroutine _raycastRotine;
+        GridTile _lastHighlightedTile;
+        GridObjectView _lastHighlightedObj;
+
 
         private void OnEnable()
         {
@@ -31,7 +33,7 @@ namespace ProjectCore.Grid
         private void StartRayCasting()
         {
 
-            RaycastRotine = StartCoroutine(RayCasting());
+            _raycastRotine = StartCoroutine(RayCasting());
         }
 
         private IEnumerator RayCasting()
@@ -40,29 +42,47 @@ namespace ProjectCore.Grid
             {   
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                // Perform raycasting
                 if (Physics.Raycast(ray, out hit, RayCastLength, tileLayer))
                 {
                     //Debug.Log("Here");
-                    GridTile selectedTile = hit.collider.GetComponent<GridTile>();
-                    if (selectedTile != lastHighlightedTile)
+                    if (hit.collider.CompareTag("GridTile"))
                     {
-                        // Remove highlight from the last highlighted tile
-                        if (lastHighlightedTile != null)
+                        GridTile selectedTile = hit.collider.GetComponent<GridTile>();
+                        if (selectedTile != _lastHighlightedTile)
                         {
-                            lastHighlightedTile.RemoveHighlight();
+                            if (_lastHighlightedTile != null)
+                            {
+                                _lastHighlightedTile.RemoveHighlight();
+                            }
+                            selectedTile.HighlightTile(1);
+                            _lastHighlightedTile = selectedTile;
+                            if (CurrentObject.GridObject != null && ObjectParent.Component != null)
+                            { CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); }
                         }
 
-                        // Highlight the selected tile
-                        selectedTile.HighlightTile(1);
-                        lastHighlightedTile = selectedTile;
-                        if (CurrentObject.GridObject != null && ObjectParent.Component != null)
-                        { CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); }
+                        if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
+                        {
+                            CurrentObject.GridObject.InstantiateObject();
+                        }
                     }
-
-                    if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
+                    else if (hit.collider.CompareTag("GridObj"))
                     {
-                        CurrentObject.GridObject.InstantiateObject();
+                        GridObjectView selectedObj = hit.collider.GetComponent<GridObjectView>();
+
+                        if (selectedObj != _lastHighlightedObj)
+                        {
+                            if (_lastHighlightedObj != null)
+                            {
+                                _lastHighlightedObj.ShowFullView();
+                            }
+                            selectedObj.HighlightObject();
+                            _lastHighlightedObj = selectedObj;
+                        }
+
+                        if (Input.GetMouseButtonDown(1) && selectedObj != null)
+                        {
+                            selectedObj.RemoveObject();
+                        }
                     }
                 }
                 yield return new WaitForSeconds(0.002f);
@@ -72,9 +92,9 @@ namespace ProjectCore.Grid
 
         private void StopRayCasting()
         {
-            if (RaycastRotine != null)
+            if (_raycastRotine != null)
             {
-                StopCoroutine(RaycastRotine);
+                StopCoroutine(_raycastRotine);
             }
         }
     }

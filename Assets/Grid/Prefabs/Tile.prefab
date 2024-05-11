@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3559032103692012432}
   m_Layer: 3
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: GridTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3f24a11b95c174a87946d44c619b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileColider: {fileID: 3559032103692012432}
   TileId: 0
   xIndex: 0
   yIndex: 0
-  IsOccupied: 0
   HighlightedObj: {fileID: 6426214706735721883}
   BlockSign: {fileID: 5359008855533968058}
 --- !u!65 &3559032103692012432

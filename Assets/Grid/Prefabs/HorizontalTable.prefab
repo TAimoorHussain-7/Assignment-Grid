@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 466864727495174569}
   - component: {fileID: 1016506553811123815}
   - component: {fileID: 3262041312799663957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HorizontalTable
-  m_TagString: Untagged
+  m_TagString: GridObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

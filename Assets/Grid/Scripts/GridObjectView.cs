@@ -15,6 +15,11 @@ namespace ProjectCore.Grid
             {
                 tile.IsOccupied = true;
             }
+            ShowFullView();
+        }
+
+        public void ShowFullView()
+        {
             Color color = ObjectBody.color;
             color.a = 1;
             ObjectBody.color = color;
@@ -32,6 +37,16 @@ namespace ProjectCore.Grid
             Color color = ObjectBody.color;
             color.a = 0.5f;
             ObjectBody.color = color;
+        }
+
+        public void RemoveObject()
+        {
+            //Debug.Log("Here");
+            foreach (GridTile tile in _objectLocation)
+            {
+                tile.IsOccupied = false;
+            }
+            Destroy(this.gameObject);
         }
     }
 }
