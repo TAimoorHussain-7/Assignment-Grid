@@ -11,6 +11,7 @@ namespace ProjectCore.Grid
         [SerializeField] LayerMask tileLayer;
         [SerializeField] float RayCastLength;
         [SerializeField] SOBool Editing;
+        [SerializeField] SoGameObject NewGridObj;
         [SerializeField] SOEvents RayCastEvent;
         [SerializeField] GridObjectHolderSO CurrentObject;
         [SerializeField] SOTransform ObjectParent;
@@ -44,22 +45,30 @@ namespace ProjectCore.Grid
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, RayCastLength, tileLayer))
                 {
-                    //Debug.Log("Here");
                     if (hit.collider.CompareTag("GridTile"))
                     {
+                        if (_lastHighlightedObj != null)
+                        {
+                            _lastHighlightedObj.ShowFullView();
+                            _lastHighlightedObj = null;
+                        }
                         GridTile selectedTile = hit.collider.GetComponent<GridTile>();
                         if (selectedTile != _lastHighlightedTile)
                         {
                             if (_lastHighlightedTile != null)
                             {
                                 _lastHighlightedTile.RemoveHighlight();
+                                _lastHighlightedTile = null;
                             }
                             selectedTile.HighlightTile(1);
                             _lastHighlightedTile = selectedTile;
                             if (CurrentObject.GridObject != null && ObjectParent.Component != null)
-                            { CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); }
+                            {
+                                CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); 
+                            }
                         }
 
+                        Debug.Log("GridTile");
                         if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
                         {
                             CurrentObject.GridObject.InstantiateObject();
@@ -67,18 +76,25 @@ namespace ProjectCore.Grid
                     }
                     else if (hit.collider.CompareTag("GridObj"))
                     {
+                        if (_lastHighlightedTile != null)
+                        {
+                            _lastHighlightedTile.RemoveHighlight();
+                            _lastHighlightedTile = null;
+                        }
                         GridObjectView selectedObj = hit.collider.GetComponent<GridObjectView>();
-
+                        Debug.Log(selectedObj);
+                        Debug.Log(_lastHighlightedObj);
                         if (selectedObj != _lastHighlightedObj)
                         {
                             if (_lastHighlightedObj != null)
                             {
                                 _lastHighlightedObj.ShowFullView();
                             }
+                            NewGridObj.DestroyObject();
                             selectedObj.HighlightObject();
                             _lastHighlightedObj = selectedObj;
                         }
-
+                        Debug.Log("GridObj");
                         if (Input.GetMouseButtonDown(1) && selectedObj != null)
                         {
                             selectedObj.RemoveObject();

@@ -6,9 +6,10 @@ namespace ProjectCore.Grid
     {
         bool _isOccupied = false;
 
+        [SerializeField] GameObject HighlightedObj, BlockSign;
         [SerializeField] BoxCollider TileColider;
 
-        public int TileId, xIndex, yIndex;
+        public int TileId, XIndex, YIndex;
 
         public bool IsOccupied 
         {
@@ -20,7 +21,6 @@ namespace ProjectCore.Grid
             }
         }
 
-        [SerializeField] GameObject HighlightedObj, BlockSign;
 
         public void HighlightTile(int i)
         {

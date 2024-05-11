@@ -9,19 +9,19 @@ namespace ProjectCore.Grid
     public class GridCreator : ScriptableObject
     {
         [SerializeField] GridTile TileObj;
-        [SerializeField] SOGameObjectsArray TilePrefabs;
+        [SerializeField] SOGameObjectsArray TilePrefabs, BuildingPrefabs;
         [SerializeField] SOBool CreatingGrid;
-        [SerializeField] ProjectGrid CurrentGrid;
+        [SerializeField] GridDataSO CurrentGrid;
 
-        public void CreateGrid(GridJsonData gridData, Vector3 tileSize, Transform tileParent)
+        public void CreateGrid(GridJsonData gridData, Vector3 tileSize, Transform tileParent, Transform buildingParent)
         {
             if (gridData.TerrainGrid.Count > 0)
             {
-                CurrentGrid.GridTiles = new GridRow[gridData.TerrainGrid.Count];
+                CurrentGrid.GridRows = new GridRow[gridData.TerrainGrid.Count];
                 for (int r = 0; r < gridData.TerrainGrid.Count; r++)
                 {
-                    CurrentGrid.GridTiles[r] = new GridRow();
-                    CurrentGrid.GridTiles[r].TilesRow = new List<GridTile>();
+                    CurrentGrid.GridRows[r] = new GridRow();
+                    CurrentGrid.GridRows[r].TilesRow = new List<GridTile>();
                     for (int c = 0; c < gridData.TerrainGrid[r].Count; c++)
                     {
                         int tileTypeIndex = gridData.TerrainGrid[r][c].TileType;
@@ -38,9 +38,9 @@ namespace ProjectCore.Grid
                                 newTile.transform.localPosition = position; // Set tile size
                                 newTile.transform.localScale = new Vector3(tileSize.x, tileSize.y,1); // Set tile size
                                 newTile.TileId = tileTypeIndex;
-                                newTile.xIndex = r;
-                                newTile.yIndex = c;
-                                CurrentGrid.GridTiles[r].TilesRow.Add(newTile);
+                                newTile.XIndex = r;
+                                newTile.YIndex = c;
+                                CurrentGrid.GridRows[r].TilesRow.Add(newTile);
                                 Instantiate(spriteObj, newTile.transform);
                             }
                             else
@@ -54,6 +54,26 @@ namespace ProjectCore.Grid
             else
             {
                 Debug.LogError("No GridData Available to create Grid");
+            }
+
+            if (gridData.GridBuildings.Count > 0)
+            {
+                foreach (GridBuilingBlock building in gridData.GridBuildings)
+                {
+                    GameObject newBuilding = Instantiate(BuildingPrefabs.Objects[building.BuildingId], buildingParent);
+                    for (int b = 0; b<building.TilesOccupied.Count; b++)
+                    {
+                        GridTile tempTile = CurrentGrid.GridRows[building.TilesOccupied[b].x].TilesRow[building.TilesOccupied[b].y];
+                        newBuilding.transform.position = tempTile.transform.position;
+                        if(b == 0)
+                            tempTile.IsOccupied = true;
+                    }
+                    CurrentGrid.GridBuildings.Add(building);
+                }
+            }
+            else
+            {
+                Debug.Log("No GridObject Available to create");
             }
             CreatingGrid.Value = false;
         }

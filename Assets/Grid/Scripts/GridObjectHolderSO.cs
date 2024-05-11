@@ -6,6 +6,8 @@ namespace ProjectCore.Grid
 
     public class GridObjectHolderSO : ScriptableObject
     {
-        public GridObjectInstantiator GridObject { get; set; }
+        [SerializeField] GridObjectInstantiator _gridObj;
+        public GridObjectInstantiator GridObject 
+        { get=> _gridObj; set => _gridObj = value; }
     }
 }

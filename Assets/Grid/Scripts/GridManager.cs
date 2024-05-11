@@ -8,7 +8,7 @@ namespace ProjectCore.Grid
     public class GridManager : MonoBehaviour
     {
         [SerializeField] Vector3 TileSize;
-        [SerializeField] Transform GridParent;
+        [SerializeField] Transform TilesParent, BuildingsParent;
         [SerializeField] SOBool CreatingGrid;
         [SerializeField] SOEvents CreateGridEvent;
         [SerializeField] GridCreator CurrentGridCreator;
@@ -29,11 +29,15 @@ namespace ProjectCore.Grid
             if (!CreatingGrid.Value)
             {
                 CreatingGrid.Value = true;
-                foreach (Transform tile in GridParent)
+                foreach (Transform tile in TilesParent)
                 {
                     Destroy(tile.gameObject);
                 }
-                CurrentGridCreator.CreateGrid(CurrentGridJson.CurrentJsonData, TileSize, GridParent);
+                foreach (Transform tile in BuildingsParent)
+                {
+                    Destroy(tile.gameObject);
+                }
+                CurrentGridCreator.CreateGrid(CurrentGridJson.CurrentJsonData, TileSize, TilesParent, BuildingsParent);
             }
         }
     }

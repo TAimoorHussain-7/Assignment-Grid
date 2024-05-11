@@ -596,6 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JsonMan: {fileID: 11400000, guid: 7e6eca6faa5f2c44eaf1212f88c61d82, type: 2}
   GridJsonData: {fileID: 11400000, guid: f8c7a166e7cbb2143ac6d33265c1e94c, type: 2}
+  CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}
   JsonFilePath: Assets/Grid/Resources/Json/data.json
 --- !u!4 &262852162
 Transform:
@@ -625,7 +626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileSize: {x: 1, y: 1, z: 1}
-  GridParent: {fileID: 501165537}
+  TilesParent: {fileID: 501165537}
+  BuildingsParent: {fileID: 1381815895}
   CreatingGrid: {fileID: 11400000, guid: 5c9f7cbef390f434397327131519bcd0, type: 2}
   CreateGridEvent: {fileID: 11400000, guid: c9f6be0aafecff04486e59e69c736003, type: 2}
   CurrentGridCreator: {fileID: 11400000, guid: db543ebc3a1037a4aa97a41db39832cb, type: 2}
@@ -648,6 +650,7 @@ MonoBehaviour:
     m_Bits: 8
   RayCastLength: 100
   Editing: {fileID: 11400000, guid: 7252927e7f1a4fb4d9c69212bda3fab6, type: 2}
+  NewGridObj: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
   RayCastEvent: {fileID: 11400000, guid: 370a57c7dfa3f794bb2c8428eb6e063e, type: 2}
   CurrentObject: {fileID: 11400000, guid: 96223c0e94c5f1a4fbc3fc97ca99a9cb, type: 2}
   ObjectParent: {fileID: 11400000, guid: de4afc7f2240372429090f2e3f459257, type: 2}
@@ -1634,7 +1637,6 @@ GameObject:
   - component: {fileID: 736608479}
   - component: {fileID: 736608478}
   - component: {fileID: 736608477}
-  - component: {fileID: 736608481}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1726,18 +1728,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &736608481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736608476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd56bfd0fecc7ec46add23c59f189d59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &785710492
 GameObject:
   m_ObjectHideFlags: 0

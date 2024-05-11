@@ -51,7 +51,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 0.01}
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectBody: {fileID: 47411102305470218}
+  ObjectCollider: {fileID: 1016506553811123815}
 --- !u!1 &5028485797499908865
 GameObject:
   m_ObjectHideFlags: 0

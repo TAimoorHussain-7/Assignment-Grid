@@ -8,8 +8,9 @@ namespace ProjectCore.Grid
     {
         [SerializeField] Vector2Int[] MyNeighbours;
         [SerializeField] GridObjectView VerticalTable;
-        [SerializeField] ProjectGrid CurrentGrid;
+        [SerializeField] GridDataSO CurrentGrid;
         [SerializeField] SoGameObject GridObj;
+        [SerializeField] int BuildingId;
 
         GridTile _neighbourTile;
         GridObjectView _newObj;
@@ -46,6 +47,11 @@ namespace ProjectCore.Grid
                 objectLocation[0] = StartingTile;
                 objectLocation[1] = _neighbourTile;
                 _newObj.ActiveObject(objectLocation);
+                GridBuilingBlock newTable = new GridBuilingBlock();
+                newTable.TilesOccupied.Add(new Vector2Int(StartingTile.XIndex, StartingTile.YIndex));
+                newTable.TilesOccupied.Add(new Vector2Int(_neighbourTile.XIndex, _neighbourTile.YIndex));
+                newTable.BuildingId = BuildingId;
+                CurrentGrid.GridBuildings.Add(newTable);
                 _newObj = null;
                 GridObj.Obj = null;
                 CanInstantiate = false;
@@ -58,10 +64,10 @@ namespace ProjectCore.Grid
             {
                 for (int t = 0; t < MyNeighbours.Length; t++)
                 {
-                    Vector2Int nextTile = new Vector2Int(currentTile.xIndex + MyNeighbours[t].x, currentTile.yIndex + MyNeighbours[t].y);
-                    if (nextTile.x > -1 && nextTile.x < CurrentGrid.GridTiles.Length && nextTile.y > -1 && nextTile.y < CurrentGrid.GridTiles[nextTile.x].TilesRow.Count)
+                    Vector2Int nextTile = new Vector2Int(currentTile.XIndex + MyNeighbours[t].x, currentTile.YIndex + MyNeighbours[t].y);
+                    if (nextTile.x > -1 && nextTile.x < CurrentGrid.GridRows.Length && nextTile.y > -1 && nextTile.y < CurrentGrid.GridRows[nextTile.x].TilesRow.Count)
                     {
-                        GridTile newTile = CurrentGrid.GridTiles[nextTile.x].TilesRow[nextTile.y];
+                        GridTile newTile = CurrentGrid.GridRows[nextTile.x].TilesRow[nextTile.y];
                         if (newTile.TileId == RequiredTileId && !newTile.IsOccupied)
                         {
                             if (t == 0)

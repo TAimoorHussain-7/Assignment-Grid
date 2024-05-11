@@ -5,6 +5,7 @@ namespace ProjectCore.Grid
     public class GridObjectView : MonoBehaviour
     {
         [SerializeField] SpriteRenderer ObjectBody;
+        [SerializeField] BoxCollider ObjectCollider;
         
         GridTile[] _objectLocation;
 
@@ -16,6 +17,7 @@ namespace ProjectCore.Grid
                 tile.IsOccupied = true;
             }
             ShowFullView();
+            ObjectCollider.enabled = true;
         }
 
         public void ShowFullView()
@@ -34,6 +36,7 @@ namespace ProjectCore.Grid
 
         public void HighlightObject()
         {
+            Debug.Log("Hiegh");
             Color color = ObjectBody.color;
             color.a = 0.5f;
             ObjectBody.color = color;

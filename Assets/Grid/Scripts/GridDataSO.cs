@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace ProjectCore.Grid
 {
@@ -6,5 +7,6 @@ namespace ProjectCore.Grid
     public class GridDataSO : ScriptableObject
     {
         public GridRow[] GridRows;
+        public List<GridBuilingBlock> GridBuildings;
     }
 }
