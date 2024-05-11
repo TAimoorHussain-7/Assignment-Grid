@@ -8,6 +8,7 @@ namespace ProjectCore.Grid
     [CreateAssetMenu(fileName = "GridCreator", menuName = "Scriptables/Grid/GridCreator")]
     public class GridCreator : ScriptableObject
     {
+        [SerializeField] GridTile TileObj;
         [SerializeField] SOGameObjectsArray TilePrefabs;
         [SerializeField] SOBool CreatingGrid;
         [SerializeField] ProjectGrid CurrentGrid;
@@ -29,17 +30,18 @@ namespace ProjectCore.Grid
                         if (tileTypeIndex >= 0 && tileTypeIndex < TilePrefabs.Objects.Length)
                         {
                             // Instantiate the corresponding tile prefab at the appropriate position
-                            GameObject tilePrefab = TilePrefabs.Objects[tileTypeIndex];
-                            if (tilePrefab != null)
+                            GameObject spriteObj = TilePrefabs.Objects[tileTypeIndex];
+                            if (spriteObj != null)
                             {
                                 Vector3 position = new Vector3(c * tileSize.x, r * tileSize.y, 0); // Adjust position as needed
-                                GridTile tile = Instantiate(tilePrefab, tileParent).GetComponent<GridTile>();
-                                tile.transform.localPosition = position; // Set tile size
-                                tile.transform.localScale = new Vector3(tileSize.x, tileSize.y,1); // Set tile size
-                                tile.TileId = tileTypeIndex;
-                                tile.xIndex = r;
-                                tile.yIndex = c;
-                                CurrentGrid.GridTiles[r].TilesRow.Add(tile);
+                                GridTile newTile = Instantiate(TileObj, tileParent);
+                                newTile.transform.localPosition = position; // Set tile size
+                                newTile.transform.localScale = new Vector3(tileSize.x, tileSize.y,1); // Set tile size
+                                newTile.TileId = tileTypeIndex;
+                                newTile.xIndex = r;
+                                newTile.yIndex = c;
+                                CurrentGrid.GridTiles[r].TilesRow.Add(newTile);
+                                Instantiate(spriteObj, newTile.transform);
                             }
                             else
                             {

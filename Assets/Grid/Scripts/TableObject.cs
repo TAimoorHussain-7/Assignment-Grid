@@ -7,15 +7,16 @@ namespace ProjectCore.Grid
     {
         [SerializeField] Vector2Int[] MyNeighbours;
         [SerializeField] GridObjectView VerticalTable;
+        [SerializeField] ProjectGrid CurrentGrid;
 
-        GridTile _startingTile, _neighbourTile;
+        GridTile _neighbourTile;
         GridObjectView _newObj;
         bool _isHorizontalTable = true;
-        
+
         public override void CheckForLocation(GridTile currentTile, Transform parent)
         {
             CanInstantiate = false;
-            _startingTile = null;
+            StartingTile = null;
             ObjectParent = parent;
             if (currentTile.TileId == RequiredTileId)
             {
@@ -34,10 +35,10 @@ namespace ProjectCore.Grid
         {
             if (CanInstantiate)
             {
-                _startingTile.IsOccupied = true;
+                StartingTile.IsOccupied = true;
                 _neighbourTile.IsOccupied = true;
                 GridTile[] objectLocation = new GridTile[2];
-                objectLocation[0] = _startingTile;
+                objectLocation[0] = StartingTile;
                 objectLocation[1] = _neighbourTile;
                 _newObj.ActiveObject(objectLocation);
                 _newObj = null;
@@ -94,7 +95,7 @@ namespace ProjectCore.Grid
 
         private void ShowHorizontalPlacement(GridTile StratTile)
         {
-            _startingTile = StratTile;
+            StartingTile = StratTile;
 
             if(!_isHorizontalTable && _newObj != null)
             {
@@ -103,18 +104,18 @@ namespace ProjectCore.Grid
 
             if (_newObj == null)
             {
-                _newObj = Instantiate(CurrentObj, _startingTile.transform.position, _startingTile.transform.rotation);
+                _newObj = Instantiate(CurrentObj, StartingTile.transform.position, StartingTile.transform.rotation).GetComponent<GridObjectView>();
                 _newObj.transform.SetParent(ObjectParent);
                 _isHorizontalTable = true;
             }
-            _newObj.transform.position = _startingTile.transform.position;
+            _newObj.transform.position = StartingTile.transform.position;
             _newObj.HighlightObject();
            CanInstantiate = true;
         }
 
         private void ShowVerticalPlacement(GridTile StratTile)
         {
-            _startingTile = StratTile;
+            StartingTile = StratTile;
 
             if(_isHorizontalTable && _newObj != null)
             {
@@ -123,11 +124,11 @@ namespace ProjectCore.Grid
 
             if (_newObj == null)
             {
-                _newObj = Instantiate(VerticalTable, _startingTile.transform.position, _startingTile.transform.rotation);
+                _newObj = Instantiate(VerticalTable, StartingTile.transform.position, StartingTile.transform.rotation);
                 _newObj.transform.SetParent(ObjectParent);
                 _isHorizontalTable = false;
             }
-            _newObj.transform.position = _startingTile.transform.position;
+            _newObj.transform.position = StartingTile.transform.position;
             _newObj.HighlightObject();
            CanInstantiate = true;
         }

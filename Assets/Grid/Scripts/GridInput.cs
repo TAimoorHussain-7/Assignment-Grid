@@ -59,14 +59,13 @@ namespace ProjectCore.Grid
                         if (CurrentObject.GridObject != null && ObjectParent.Component != null)
                         { CurrentObject.GridObject.CheckForLocation(selectedTile, ObjectParent.Component); }
                     }
-                }
 
-                if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
-                {
-                    CurrentObject.GridObject.InstantiateObject();
+                    if (Input.GetMouseButtonDown(0) && CurrentObject.GridObject != null)
+                    {
+                        CurrentObject.GridObject.InstantiateObject();
+                    }
                 }
-
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.005f);
             }
             StopRayCasting();
         }
