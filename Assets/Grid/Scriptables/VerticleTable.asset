@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fb5b87d32346949b329f4c9e20222e, type: 3}
+  m_Name: VerticleTable
+  m_EditorClassIdentifier: 
+  CurrentObj: {fileID: 3522884240086887124, guid: 0d8690ecd41b72c47b3a797e966a3c9d, type: 3}
+  RequiredTileId: 3
+  MyNeighbours:
+  - {x: 1, y: 0}
+  - {x: -1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  OtherTable: {fileID: 11400000, guid: dea6ed5fe20d9c843b0ac5ab8ebd2127, type: 2}
+  CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}
+  GridObj: {fileID: 11400000, guid: 4d14c0499e2313d4a87eab5ab668a379, type: 2}
+  ObjectHolder: {fileID: 11400000, guid: 96223c0e94c5f1a4fbc3fc97ca99a9cb, type: 2}
+  BuildingId: 1
