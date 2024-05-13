@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44402218, g: 0.49316543, b: 0.572232, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -610,7 +610,7 @@ MonoBehaviour:
   GridJsonData: {fileID: 11400000, guid: f8c7a166e7cbb2143ac6d33265c1e94c, type: 2}
   CurrentGrid: {fileID: 11400000, guid: e8b4b0d981daaac4a8502420f2c39e27, type: 2}
   SaveGridEvent: {fileID: 11400000, guid: 8966b0f340f33e347864c441cff38817, type: 2}
-  JsonFilePath: Assets/Grid/Resources/Json/data.json
+  JsonFilePath: Assets/Grid/Resources/Json/data_1.json
   JsonPath: Assets/Grid/Resources/Json/
   JsonFileName: data
 --- !u!4 &262852162

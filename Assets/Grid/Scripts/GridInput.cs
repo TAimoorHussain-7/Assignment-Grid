@@ -47,10 +47,10 @@ namespace ProjectCore.Grid
                 {
                     if (hit.collider.CompareTag("GridTile"))
                     {
-                        ClearTileView();
                         GridTile selectedTile = hit.collider.GetComponent<GridTile>();
                         if (selectedTile != _lastHighlightedTile)
                         {
+                            ClearTileView();
                             if (_lastHighlightedTile != null)
                             {
                                 _lastHighlightedTile.RemoveHighlight();
@@ -72,12 +72,12 @@ namespace ProjectCore.Grid
                     }
                     else if (hit.collider.CompareTag("GridObj"))
                     {
-                        ClearTileView();
                         GridObjectView selectedObj = hit.collider.GetComponent<GridObjectView>();
                         //Debug.Log(selectedObj);
                         //Debug.Log(_lastHighlightedObj);
                         if (selectedObj != _lastHighlightedObj)
                         {
+                            ClearTileView();
                             if (_lastHighlightedObj != null)
                             {
                                 _lastHighlightedObj.ShowFullView();

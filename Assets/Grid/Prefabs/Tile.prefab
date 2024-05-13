@@ -47,12 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3f24a11b95c174a87946d44c619b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileColider: {fileID: 3559032103692012432}
-  TileId: 0
-  xIndex: 0
-  yIndex: 0
   HighlightedObj: {fileID: 6426214706735721883}
   BlockSign: {fileID: 5359008855533968058}
+  TileColider: {fileID: 3559032103692012432}
+  TileId: 0
+  XIndex: 0
+  YIndex: 0
 --- !u!65 &3559032103692012432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c8668c1a5c7e4ab44bedb24a03a5a239, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a76be808fd8d4054297b14b03d18d6d1, type: 3}
   m_Color: {r: 1, g: 0.0047169924, b: 0.0047169924, a: 0.5882353}
   m_FlipX: 0
